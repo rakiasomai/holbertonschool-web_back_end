@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 ''' async and await syntax '''
-from typing import List
 import asyncio
+from typing import List
 
 get = __import__('3-tasks').task_wait_random
 
