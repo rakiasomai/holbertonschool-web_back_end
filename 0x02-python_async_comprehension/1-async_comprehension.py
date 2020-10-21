@@ -1,15 +1,12 @@
 #!/usr/bin/env python3
 ''' Async comprehension '''
-import asyncio
-import time
+from typing import List
+Vector = List[float]
 
-async_comprehension = __import__('1-async_comprehension').async_comprehension
+async_generator = __import__('0-async_generator').async_generator
 
 
-async def measure_runtime() -> float:
-    ''' Function to coutne '''
-    start = time.perf_counter()
-    await asyncio.gather(async_comprehension(), async_comprehension(),
-                         async_comprehension(), async_comprehension())
-    end = time.perf_counter()
-    return end - start
+async def async_comprehension() -> Vector:
+    ''' Function that return a list '''
+    Final = [y async for y in async_generator()]
+    return Final
