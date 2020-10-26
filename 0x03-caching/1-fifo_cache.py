@@ -7,8 +7,7 @@ class BasicCache(BaseCaching):
     ''' BasicCache class inherit from BaseCaching '''
 
     def __init__(self):
-        ''' initialize
-        '''
+        ''' initialize '''
         self.key_list = []
         super().__init__()
 
