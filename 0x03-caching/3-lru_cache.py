@@ -16,7 +16,7 @@ class LRUCache(BaseCaching):
             self.cache_data[key] = item
             if len(self.cache_data) > BaseCaching.MAX_ITEMS:
                 x = sorted(self.ages.items(),
-                                key=lambda x: x[1])[0][0]
+                           key=lambda x: x[1])[0][0]
                 self.cache_data.pop(x)
                 self.ages.pop(x)
                 print('DISCARD:', x)
