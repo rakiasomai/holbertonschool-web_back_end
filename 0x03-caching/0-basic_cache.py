@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 ''' caching systems '''
-
-from base_caching import BaseCaching
+BaseCaching = __import__("base_caching").BaseCaching
 
 
 class BasicCache(BaseCaching):
-    ''' BassicCache '''
+    """BasicCache class inherit from BaseCaching"""
 
     def put(self, key, item):
-        ''' Function put '''
-        pass
+        ''' puts
+        '''
+        if key is None or item is None:
+            return
+        self.cache_data.update({key: item})
 
-    def get(self, key):
-        ''' Function get '''
-        pass
+     def get(self, key):
+        ''' Gets
+        '''
+        if key is None or key not in self.cache_data.keys():
+            return
+        return self.cache_data.get[key]
