@@ -38,26 +38,18 @@ class Server:
 
     def get_hyper(self, page: int = 1, page_size: int = 10) -> Dict:
         ''' Def get hyper '''
-        dataset = self.dataset()
+        dataset_items = len(self.dataset())
         data = self.get_page(page, page_size)
-        page = page
-        total_pages = math.ceil(len(dataset) / page_size)
-        page_size = len(data)
-        next_page = None
-        prev_page = None
-        if page > 1:
-            prev_page = page - 1
-        if page < total_pages:
-            next_page = page + 1
+        total_pages = math.ceil(dataset_items / page_size)
 
-        P = {
-            'page_size': page_size,
-            'page': page,
-            'data': data,
-            'next_page': next_page,
-            'prev_page': prev_page,
-            'total_pages': total_pages
-        }
+        p = {
+            "page": page,
+            "page_size": page_size if page < total_pages else 0,
+            "data": data,
+            "next_page": page + 1 if page + 1 < total_pages else None,
+            "prev_page": page - 1 if page - 1 > 0 else None,
+            "total_pages": total_pages
+            }
         return p
 
 
