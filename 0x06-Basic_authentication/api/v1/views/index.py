@@ -37,3 +37,4 @@ def unauth():
       - This endpoint must raise a 401 error by using abort
     """
     return abort(401)
+
