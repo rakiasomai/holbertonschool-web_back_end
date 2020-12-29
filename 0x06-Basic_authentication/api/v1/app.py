@@ -22,7 +22,7 @@ def not_found(error) -> str:
 
 @app.errorhandler(401)
 def unauth(error) -> str:
-    """a"""
+    """def unauthorized"""
     return jsonify({"error": "Unauthorized"}), 401
 
 
