@@ -45,9 +45,16 @@ class BasicAuth(Auth):
             return None
         if user_email and user_pwd:
             users = User.search({"email": user_email})
-            if not users:
-                return None
             for user in users:
                 if user and user.is_valid_password(user_pwd):
                     return user
         return None
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        ''' complete basic Authentification '''
+        if request:
+            auth_head = self.authorization_header(request)
+            extract = self.extract_base64_authorization_header(auth_head)
+            decode = self.decode_base64_authorization_header(extract)
+            (email, password) = self.extract_user_credentials(decode)
+            return self.user_object_from_credentials(email, password)
