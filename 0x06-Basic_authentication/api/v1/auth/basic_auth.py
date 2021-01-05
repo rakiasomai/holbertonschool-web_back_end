@@ -3,7 +3,8 @@
 '''
 import base64
 from api.v1.auth.auth import Auth
-
+from typing import TypeVar
+from models.user import User
 
 class BasicAuth(Auth):
     ''' BasicAuth class
@@ -36,3 +37,10 @@ class BasicAuth(Auth):
             return(mail, password)
         return(None, None)
 
+    def user_object_from_credentials(self, user_email: str, user_pwd: str) -> TypeVar('User'):
+        ''' def user object from credentials '''
+        if user_email and user_pwd:
+            x = User.search({"email": user_email})
+            for user in x:
+                if user and user.is_valid_password(user_pwd):
+                    return user
