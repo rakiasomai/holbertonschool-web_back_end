@@ -18,8 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.0\n"
 
-msgid "home_title"
+msgid "%(home_title)"
 msgstr "Bienvenue chez Holberton"
 
-msgid "home_header"
+msgid "%(home_header)"
 msgstr "Bonjour monde!"
