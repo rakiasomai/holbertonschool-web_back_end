@@ -23,6 +23,7 @@ def get_locale():
     ''' return best languages '''
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
+
 @app.route("/", methods=["GET"], strict_slashes=False)
 def hello_world():
     ''' return the template '''
