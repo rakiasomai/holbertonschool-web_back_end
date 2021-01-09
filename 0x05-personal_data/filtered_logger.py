@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 ''' Personal Data '''
 
+import logging
 from typing import List
 import re
-import logging
 
 
 class RedactingFormatter(logging.Formatter):
