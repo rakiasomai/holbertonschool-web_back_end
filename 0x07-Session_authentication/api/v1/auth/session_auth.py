@@ -3,6 +3,8 @@
 
 from api.v1.auth.auth import Auth
 from uuid import uuid4
+from typing import TypeVar
+from models.user import User
 
 
 class SessionAuth(Auth):
@@ -26,3 +28,11 @@ class SessionAuth(Auth):
         if type(session_id) != str:
             return None
         return self.user_id_by_session_id.get(session_id)
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        ''' def current user '''
+        if request is None:
+            return None
+        s_cookie = self.session_cookie(request)
+        user_id = self.user_id_by_session_id.get(s_cookie)
+        return User.get(user_id)
