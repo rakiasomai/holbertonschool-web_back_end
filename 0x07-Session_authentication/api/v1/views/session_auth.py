@@ -19,10 +19,10 @@ def login() -> str:
     user = User.search({"email": email})
     if not user:
         return jsonify(error="no user found for this email"), 404
-    if not user.is_valid_password(password):
+    if not user[0].is_valid_password(password):
         return jsonify({"error": "wrong password"}), 401
     from api.v1.app import auth
-    session = auth.create_session(user.id)
-    json = jsonify(user.to_json())
+    session = auth.create_session(user[0].id)
+    json = jsonify(user[0].to_json())
     json.set_cookie(os.getenv('SESSION_NAME'), session)
     return json
