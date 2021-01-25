@@ -31,4 +31,3 @@ class DB:
         self._session.add(n_user)
         self._session.commit()
         return n_user
-    
