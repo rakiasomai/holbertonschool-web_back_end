@@ -5,6 +5,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from user import Base, User
 from typing import TypeVar
+from sqlalchemy.exc import InvalidRequestError
+from sqlalchemy.orm.exc import NoResultFound
 
 
 class DB:
@@ -30,3 +32,13 @@ class DB:
         self._session.add(n_user)
         self._session.commit()
         return n_user
+
+    def find_user_by(self, **kargs) -> TypeVar('User'):
+        ''' def find user '''
+        try:
+            search = self._session.query(User).filter_by(**kargs).first()
+        except TypeError:
+            raise InvalidRequestError
+        if search is None:
+            raise NoResultFound
+        return search
