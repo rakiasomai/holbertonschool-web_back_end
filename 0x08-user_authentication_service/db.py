@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+''' Module data base '''
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
@@ -23,8 +25,8 @@ class DB:
         return self.__session
 
     def add_user(self, email: str, hashed_password: str) -> TypeVar('User'):
-        """ def add user """
-        user = User(email=email, hashed_password=hashed_password)
-        self._session.add(user)
+        ''' def add user '''
+        n_user = User(email=email, hashed_password=hashed_password)
+        self._session.add(n_user)
         self._session.commit()
-        return user
+        return n_user
