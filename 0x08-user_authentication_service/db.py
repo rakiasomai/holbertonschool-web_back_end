@@ -28,17 +28,27 @@ class DB:
 
     def add_user(self, email: str, hashed_password: str) -> TypeVar('User'):
         ''' def add user '''
-        n_user = User(email=email, hashed_password=hashed_password)
-        self._session.add(n_user)
+        user = User(email=email, hashed_password=hashed_password)
+        self._session.add(user)
         self._session.commit()
-        return n_user
+        return user
 
     def find_user_by(self, **kargs) -> TypeVar('User'):
         ''' def find user '''
         try:
-            search = self._session.query(User).filter_by(**kargs).first()
+            user = self._session.query(User).filter_by(**kargs).first()
         except TypeError:
             raise InvalidRequestError
-        if search is None:
+        if user is None:
             raise NoResultFound
-        return search
+        return user
+
+    def update_user(self, user_id: int, **kwargs) -> None:
+        ''' def update user '''
+        user = self.find_user_by(id=user_id)
+        for x, y in kwargs.items():
+            if hasattr(user, x):
+                setattr(user, x, y)
+            else:
+                raise ValueError
+        self._session.commit()
