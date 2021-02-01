@@ -30,7 +30,16 @@ class Auth:
             try:
                 self._db.find_user_by(email=email)
             except NoResultFound:
-                new_user = self._db.add_user(email, _hash_password(password))
-                return new_user
+                user = self._db.add_user(email, _hash_password(password))
+                return user
             else:
                 raise ValueError("User {} already exists".format(email))
+
+    def valid_login(self, email: str, password: str) -> bool:
+        ''' def valid login '''
+        try:
+            user = self._db.find_user_by(email=email)
+            if user:
+                return bcrypt.checkpw(password.encode(), user.hashed_password)
+        except NoResultFound:
+            return False
