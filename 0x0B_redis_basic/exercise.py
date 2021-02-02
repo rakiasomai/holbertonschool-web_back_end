@@ -32,6 +32,7 @@ def call_history(method: Callable) -> Callable:
         return fin
     return wrapper
 
+
 def replay(method: Callable):
     ''' def replay '''
     key_m = method.__qualname__
