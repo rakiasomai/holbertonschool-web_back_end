@@ -7,6 +7,7 @@ BEGIN
 	FROM DUAL
 	WHERE project_name NOT IN (SELECT name FROM projects);
     INSERT INTO corrections (user_id, project_id, score)
-    VALUES (user_id, (SELECT id FROM projects WHERE name = project_name), score);
+    SET @project_id = SELECT id FROM projects WHERE name = project_name
+    VALUES (user_id, @project_id, score);
 END //
 DELIMITER ;
