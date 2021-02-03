@@ -1,6 +1,6 @@
 -- sql project
 DELIMITER //
-CCREATE PROCEDURE ComputeAverageWeightedScoreForUser 
+CREATE PROCEDURE ComputeAverageWeightedScoreForUser 
      (IN user_id INT)
 BEGIN
 UPDATE users
