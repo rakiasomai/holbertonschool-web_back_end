@@ -11,9 +11,9 @@ def log_stats():
     print("{} logs".format(data.count_documents({})))
     print('Methods:')
 
-    for y in methods:
-        print("\ty {}: {}".format(
-                y, data.count_documents({'method': y})))
+    for method in methods:
+        print("\tmethod {}: {}".format(
+                method, data.count_documents({'method': method})))
 
     print("{} status check".format(
         data.count_documents({'method': 'GET', 'path': '/status'})))
